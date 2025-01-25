@@ -4,6 +4,7 @@
     <test verbose="2" preserve-order="true" name="Login Testes">
         <classes>
                 <class name="tests.LoginTest"/>
+            <class name="tests.DashboardTest"/>
         </classes>
     </test>
 </suite>

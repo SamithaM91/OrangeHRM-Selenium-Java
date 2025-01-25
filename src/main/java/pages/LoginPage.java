@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -28,6 +29,7 @@ public class LoginPage {
     //Actions
     @Step("Enter Username: {Username}")
     public void enterUsername(String username){
+        wait.until(ExpectedConditions.presenceOfElementLocated(usernameField));
         wait.until(ExpectedConditions.visibilityOfElementLocated(usernameField));
         driver.findElement(usernameField).sendKeys(username);
     }
@@ -38,7 +40,7 @@ public class LoginPage {
         driver.findElement(passwordField).sendKeys(password);
     }
 
-    @Step("Clock on Login Button")
+    @Step("Click on Login Button")
     public void clickLoginButton(){
         wait.until(ExpectedConditions.elementToBeClickable(loginButton));
         driver.findElement(loginButton).click();
@@ -56,7 +58,9 @@ public class LoginPage {
 
     @Step("Check if Dashboard is displayed")
     public boolean isDashboardDisplayed(){
-        return driver.getCurrentUrl().contains("dashboard");
+        String currentURL = driver.getCurrentUrl();
+        Assert.assertNotNull(currentURL,"Current URL is NULL");
+        return currentURL.contains("dashboard");
     }
 
 
